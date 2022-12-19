@@ -1,0 +1,105 @@
+.stellar {
+  color: var(--white);
+  height: var(--depth);
+  background-color: #000;
+  font-size: calc(var(--index) * .8);
+  font-family: raleway_c, sans-serif;
+  line-height: 1.75;
+  font-weight: 300;
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-weight: 100;
+    text-transform: uppercase;
+    /* ориентируется на ширину максимального контента */
+    width: min-content;
+    line-height: 1;
+  }
+
+  .container {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    /* perspective задается родительскому элементу если будет проиcходить сдвиг потомков по 
+    оси x */
+    perspective: 1500px;
+  }
+
+  .gallery {
+    /* задается чтобы передавал дочернему элементу стиль трансформирования  */
+    transform-style: preserve-3d;
+    height: 100%;
+  }
+
+  .frame {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    transition: var(--transition), opacity .75s ease;
+    will-change: transform;
+    /* убрть размытость при скроле */
+    transform-style: preserve-3d;
+
+    &_bg{
+      background-color: rgb(0 0 0 / .87);
+    }
+
+    h2 {
+      text-align: center;
+      font-size: calc(var(--index) * 3.3);
+    }
+
+    h3 {
+      font-size: calc(var(--index) * 3);
+    
+    }
+
+    p {
+      max-width: 30vw;
+      margin-top: 5vh;
+    }
+
+    &-media{
+      position: relative;
+      width: calc(var(--index) * var(--side-small));
+      height: calc(var(--index) * var(--side-big));
+      background-position: center;
+      background-size: cover;
+
+      &_left{
+        right: calc(var(--side-small) / 2 * var(--index) + var(--gutter));
+      }
+
+      &_right{
+        left: calc(var(--side-small) / 2 * var(--index) + var(--gutter));
+      }
+
+      
+    }
+  }
+
+  .text-left>* {
+    position: relative;
+    right: 18vw;
+  }
+  
+  .text-right>* {
+    position: relative;
+    left: 18vw;
+  }
+}
+
+video.frame-media_left {
+  right: calc(var(--side-big) / 2 * var(--index) + var(--gutter));
+}
+
+video.frame-media_right {
+  left: calc(var(--side-big) / 2 * var(--index) + var(--gutter));
+}

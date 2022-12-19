@@ -1,0 +1,86 @@
+@import url("../../../styles/index.scss");
+
+.scroll-info {
+  position: absolute;
+  left: 50%;
+  // calc(var(--index) * 8)
+  bottom: calc(var(--index) * 8.5);
+  margin-left: -50px;
+  width: 100px;
+  height: 45px;
+  z-index: 2;
+  overflow: hidden;
+
+  
+
+  //animation
+  transform: translate(0, calc(var(--index) * 8));
+  opacity: 0;
+  // Анимируем opacity 5 секунд с задержкой перед началом анимации 1 секунду
+  transition: opacity 5s 1s, transform 1s 1s ease-in-out;
+
+  &_show {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+
+  //animation
+
+  &__link {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    color: var(--black);
+    font-family: Calibre_d, sans-serif;
+    font-weight: 700;
+    line-height: 1;
+    font-size: 16px;
+    text-align: center;
+    z-index: 1;
+  }
+
+  &__line {
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+    width: 80px;
+    height: 2px;
+    overflow: hidden;
+    z-index: 0;
+
+    @keyframes scroll-info__line {
+
+      0%,
+      5% {
+        width: 0px;
+      }
+
+      33%,
+      66% {
+        left: 0px;
+        width: 80px;
+      }
+
+      95%,
+      100% {
+        left: 80px;
+      }
+    }
+
+    div {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 80px;
+      height: 2px;
+      background-color: var(--black);
+      animation-duration: 1.5s;
+      animation-fill-mode: both;
+      animation-iteration-count: infinite;
+      animation-name: scroll-info__line;
+      animation-timing-function: ease-in-out;
+    }
+  }
+}

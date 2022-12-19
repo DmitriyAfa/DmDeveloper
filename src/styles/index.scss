@@ -1,0 +1,50 @@
+@import url('./fonts/fonts.scss');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+}
+
+li{
+  list-style: none;
+}
+
+:root {
+  --index: calc(1vh + 1vw);
+
+  // colors
+  --black: #1a1a3a;
+  --white: #e5e5e5;
+
+  // Stellar
+  --gutter: 30px;
+
+  /* определение горизонтальной и вертикальной развертки */
+  --side-small: 26;
+  --side-big: 36;
+
+  --depth: 4000px;
+  --transition: .75s cubic-bezier(.75, .5, 0, 1);
+  //Stellar
+}
+
+body {
+  font-family: Noto_d;
+  font-weight: 400;
+  letter-spacing: 1.5px;
+  font-size: calc(var(--index) * 1);
+  background-color: var(--white);
+  color: var(--black);
+
+  @media (max-width: 560px) {
+    font-size: calc(var(--index) * 1.5);
+  }
+  &::-webkit-scrollbar {
+    width: 0;
+  }
+}

@@ -1,0 +1,151 @@
+.projects {
+  position: relative;
+  font-size: calc(var(--index) * 2.75);
+  padding: calc(var(--index) * 2.75);
+
+  // vars
+  --transition: 1.25s cubic-bezier(.2, .5, 0, 1);
+  --transition-cursor: 2s cubic-bezier(.05, .5, 0, 1);
+  // vars
+
+  &_animation{
+    //animation start
+    transform: translate3d(0, 100vh, 0);
+
+    // Анимируем opacity 5 секунд с задержкой перед началом анимации 1 секунду
+    transition: transform 1s .3s;
+
+    &-show {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+
+    //animation end
+  }
+
+  &__item {
+    color: var(--black);
+    text-decoration: none;
+    display: block;
+    line-height: 0.9;
+    padding: calc(var(--index) * 3) calc(var(--index) * 7.5);
+    border-bottom: 1px solid rgb(0 0 0 / .09);
+
+    /* Увеличивает значение счетчика, который задается свойством counter-reset */
+    counter-increment: my-counter;
+
+    &::before {
+      content: '(0' counter(my-counter) ')';
+      position: absolute;
+      font-size: calc(var(--index) * .95);
+      margin-left: calc(var(--index) * -2.25);
+      margin-top: calc(var(--index) / 2);
+      letter-spacing: .5px;
+
+      /* animation */
+      transition: transform var(--transition);
+      transition-delay: .025s;
+      will-change: transofrm;
+      /* animation */
+    }
+
+    &:first-child {
+      border-top: 1.5px solid var(--black);
+    }
+  }
+
+  &__header {
+    width: min-content;
+
+    /* animation */
+    transition: transform var(--transition);
+    // Аппаратное ускорение для лучшего отображения анимации без "багов"
+    will-change: transofrm;
+    /* animation */
+  }
+
+  &__cursor {
+    --width: calc(var(--index) * 22);
+    --height: calc(var(--index) * 14);
+    position: fixed;
+    width: var(--width);
+    height: 0;
+    top: calc(var(--height) * -.5);
+    left: calc(var(--width) * -.5);
+    overflow: hidden;
+
+    /* анимация движения курсора - получаем переменные из style в html */
+    transform: translate3d(var(--move-x), var(--move-y), 0);
+    transition: transform var(--transition-cursor), height 1s ease;
+    will-change: transofrm;
+    /* анимация движения курсора */
+    z-index: -1;
+
+    .image {
+      --cursor-transform: translate3d(calc(var(--move-x) / -5), calc(var(--move-y) / -5), 0);
+      position: relative;
+      width: calc(var(--width) * 2.5);
+      height: calc(var(--height) * 2.5);
+      top: calc(var(--height) * -.4);
+      left: calc(var(--width) * -.25);
+      background-size: cover;
+      background-position: center;
+
+      /* Parallax effect on the cursor */
+      transform: var(--cursor-transform) scale(1.5);
+      transition: transform var(--transition-cursor);
+      /* Parallax effect on the cursor */
+
+      &_1 {
+        background-position: calc(var(--index) * -20) calc(var(--index) * -8);
+      }
+
+      &_2 {
+        background-position: calc(var(--index) * -18.3) calc(var(--index) * 4.85);
+      }
+
+      &_3 {
+        --cursor-transform: translate3d(calc(var(--move-x) / -3), calc(var(--move-y) / -3), 0);
+        background-position: calc(var(--index) / 20) calc(var(--index) * -1.5);
+      }
+
+      &_4 {
+        background-position: calc(var(--height) * -0.3) calc(var(--height) * -.5);
+      }
+
+      &_5 {
+        background-position: calc(var(--height) * -1.2) calc(var(--height) * -.375);
+      }
+    }
+  }
+
+}
+
+.projects__item:hover .projects__header,
+.projects__item:hover::before {
+  /* animation */
+  transform: translate3d(calc(var(--index) * -5), 0, 0);
+
+}
+
+.projects__item:hover .projects__cursor {
+  height: var(--height);
+}
+
+.projects__item:hover .image {
+  transform: var(--cursor-transform) scale(1);
+}
+
+.projects__item:hover .image_1,
+.projects__item:hover .image_2  {
+  transform: var(--cursor-transform) scale(.8);
+}
+
+.projects__item:hover .image_3,
+.projects__item:hover .image_4 {
+  transform: var(--cursor-transform) scale(.7);
+}
+
+.projects__item:hover .image_5 {
+  transform: var(--cursor-transform) scale(.6);
+}
